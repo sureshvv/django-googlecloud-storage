@@ -33,9 +33,15 @@ class GoogleCloudStorage(Storage):
         type, encoding = mimetypes.guess_type(name)
         #files are stored with public-read permissions. Check out the google acl options if you need to alter this.
         gss_file = gcs.open(filename, mode='w', content_type=type, options={'x-goog-acl': 'public-read', 'cache-control': settings.GOOGLE_CLOUD_STORAGE_DEFAULT_CACHE_CONTROL,})
-        content.open()
+        try:
+            content.open()
+        except:
+            pass
         gss_file.write(content.read())
-        content.close()
+        try:
+            content.close()
+        except:
+            pass
         gss_file.close()
         return name
 
