@@ -12,8 +12,10 @@ file manager solutions such as django-filer. The code as it is right now stores 
 Prerequisites
 -------------
 
-You need to have an appengine project. This will not work as a standalone solution for non appengine django
-projects, since there is no authentication mechanism with the google cloud storage implemented.
+You need to have an appengine project. This will not work as a standalone solution for non appengine django projects, since there is no authentication mechanism with the google cloud storage implemented.
+
+
+### If you want to copy the files into your repository.
 
 You need to install the GCS client library from
 https://developers.google.com/appengine/docs/python/googlecloudstorageclient/download.
@@ -23,7 +25,11 @@ Just run `pip install GoogleAppEngineCloudStorageClient -t <your_app_directory/l
 Installation
 -------------
 
-Just copy the google folder in your project directory
+```
+pip install django-google-cloud-storage
+```
+
+Or Just copy the google folder in your project directory
 
 Configuration
 -------------
@@ -37,3 +43,10 @@ On your django settings.py file you need to add the following settings
 And finally declare the file storage backend you will use on your settings.py file
 
     DEFAULT_FILE_STORAGE = 'google.storage.googleCloud.GoogleCloudStorage'
+
+
+Credits
+-------
+
+Christos Kopanos (@ckopanos) - source code
+Richard Caceres (@rchrd2) - packaging into python module
