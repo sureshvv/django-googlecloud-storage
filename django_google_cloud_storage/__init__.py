@@ -94,7 +94,7 @@ class GoogleCloudStorage(Storage):
         return self.created_time(name)
 
     def url(self, name):
-        if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+        if not os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
             # we need this in order to display images, links to files, etc from the local appengine server
             filename = "/gs"+self.location+"/"+name
             key = create_gs_key(filename)
