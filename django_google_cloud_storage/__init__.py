@@ -6,7 +6,7 @@ from django.core.files.storage import Storage
 from google.appengine.api.blobstore import create_gs_key
 import cloudstorage as gcs
 
-__author__ = 'ckopanos@redmob.gr'
+__author__ = 'ckopanos@redmob.gr, me@rchrd.net'
 
 
 class GoogleCloudStorage(Storage):
@@ -20,19 +20,31 @@ class GoogleCloudStorage(Storage):
             base_url = settings.GOOGLE_CLOUD_STORAGE_URL
         self.base_url = base_url
 
-    def _open(self, name, mode='rb'):
-        filename = self.location+"/"+name
-        gcs_file = gcs.open(filename,mode='r')
-        file = ContentFile(gcs_file.read())
-        gcs_file.close()
-        return file
+    def _open(self, name, mode='r'):
+        filename = self.location + "/" + name
 
+        # rb is not supported
+        if mode == 'rb':
+            mode = 'r'
+
+        if mode == 'w':
+            type, encoding = mimetypes.guess_type(name)
+            gcs_file = gcs.open(filename, mode=mode, content_type=type, 
+                                options={'x-goog-acl': 'public-read', 
+                                         'cache-control': settings.GOOGLE_CLOUD_STORAGE_DEFAULT_CACHE_CONTROL,})
+        else:
+            gcs_file = gcs.open(filename, mode=mode)
+
+        return gcs_file
+        
     def _save(self, name, content):
-        filename = self.location+"/"+name
+        filename = self.location + "/" + name
         filename = os.path.normpath(filename)
         type, encoding = mimetypes.guess_type(name)
         #files are stored with public-read permissions. Check out the google acl options if you need to alter this.
-        gss_file = gcs.open(filename, mode='w', content_type=type, options={'x-goog-acl': 'public-read', 'cache-control': settings.GOOGLE_CLOUD_STORAGE_DEFAULT_CACHE_CONTROL,})
+        gss_file = gcs.open(filename, mode='w', content_type=type, 
+                            options={'x-goog-acl': 'public-read', 
+                                     'cache-control': settings.GOOGLE_CLOUD_STORAGE_DEFAULT_CACHE_CONTROL,})
         try:
             content.open()
         except:
@@ -96,9 +108,9 @@ class GoogleCloudStorage(Storage):
     def url(self, name):
         if not os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
             # we need this in order to display images, links to files, etc from the local appengine server
-            filename = "/gs"+self.location+"/"+name
+            filename = "/gs" + self.location + "/" + name
             key = create_gs_key(filename)
-            return "http://localhost:8001/blobstore/blob/"+key+"?display=inline"
+            return "http://localhost:8001/blobstore/blob/" + key + "?display=inline"
         return self.base_url+"/"+name
 
 
