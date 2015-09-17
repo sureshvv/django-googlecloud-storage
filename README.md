@@ -1,7 +1,7 @@
 django-google-cloud-storage
 ===========================
 
-A file storage backend for django appengine projects that uses google cloud storage
+Google Cloud Storage file backend for Django
 
 If you run your projects on Google's appengine and you are using the django framework you might need this
 file backend since there is no way to upload files, images, etc on appengine. Although solutions exist for
@@ -48,5 +48,5 @@ And finally declare the file storage backend you will use on your settings.py fi
 Credits
 -------
 
-Christos Kopanos (@ckopanos) - source code
-Richard Caceres (@rchrd2) - packaging into python module
+Christos Kopanos (@ckopanos) - source code  
+Richard Caceres (@rchrd2) - packaging into python module  
