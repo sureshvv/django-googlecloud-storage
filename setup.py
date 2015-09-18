@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 version = "0.0.2"
 
 setup(
-    name = "django_google_cloud_storage",
+    name = "django-google-cloud-storage",
     version = version,
     license = "GNU GENERAL PUBLIC LICENSE",
     packages = ["django_google_cloud_storage"],
