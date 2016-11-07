@@ -38,6 +38,8 @@ On your django settings.py file you need to add the following settings:
 Credits
 -------
 
-Christos Kopanos (@ckopanos) - original work using an older version of the google client libs 
-Richard Caceres (@rchrd2) - packaged the original into python module
-Suresh V(@sureshvv) - used the new google-cloud package and namespace packages
+In historical order:
+
+    Christos Kopanos (@ckopanos) - original work using an older version of the google client libs 
+    Richard Caceres (@rchrd2) - packaged the original into python module
+    Suresh V(@sureshvv) - used the new google-cloud package and namespace packages
