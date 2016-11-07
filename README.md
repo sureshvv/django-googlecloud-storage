@@ -20,8 +20,8 @@ This version works with the google-cloud package from google. It is listed as a 
 Installation
 -------------
 
-```pip install django-googlecloud-storage
-```
+    pip install django-googlecloud-storage
+
 
 Configuration
 -------------
