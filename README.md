@@ -1,5 +1,5 @@
-django-googlecloud-storage
-===========================
+Project:Django-Googlecloud-Storage 
+==================================
 
 Google Cloud Storage file backend for Django
 
